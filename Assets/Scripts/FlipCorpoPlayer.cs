@@ -6,6 +6,10 @@ public class FlipCorpoPlayer : MonoBehaviour
 {
     //Variável com as variáveis do SpriteRenderer
     private SpriteRenderer spriteCorpo;
+
+    public bool VisaoEsquerdaOuDireita {
+        get {return spriteCorpo.flipX; }
+    }
     // Start is called before the first frame update
     void Start()
     {
