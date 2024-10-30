@@ -6,16 +6,6 @@ public class MovimentarPlayer : MonoBehaviour
 {
     //Variável de velocidade de movimento
     public float velocidade;
-    //Variável com o script do Flip do corpo do player
-    private FlipCorpoPlayer flipCorpoPlayer;
-    //Variável com o script do Pé Player
-    private PePlayer pePlayer;
-    //Variável com o script da Cabeça do Player
-    private CabecaPlayer cabecaPlayer;
-    //Variáveis com os limites da esquerda e direita do Player
-    private DireitaPlayer direitaPlayer;
-    private EsquerdaPlayer esquerdaPlayer;
-
     //Variáveis para dar força ao jogador para pular
     public float forcaDoPuloY = 1.5f;
     public float forcaDoPuloX = 0;
@@ -24,30 +14,14 @@ public class MovimentarPlayer : MonoBehaviour
     public bool estaPulando;
     //Variável para habilitar o pulo duplo
     public bool puloDuplo;
-
-    //Variável do rigidbody2D
-    private Rigidbody2D rigidbody2D;
-
     //Uma variável de Coroutine
     private Coroutine coroutinePulo;
-
-    private AnimacaoPlayer animacaoPlayer;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        flipCorpoPlayer = GetComponentInChildren<FlipCorpoPlayer>();
-        pePlayer = GetComponentInChildren<PePlayer>();
-        cabecaPlayer = GetComponentInChildren<CabecaPlayer>();
-        direitaPlayer = GetComponentInChildren<DireitaPlayer>();
-        esquerdaPlayer = GetComponentInChildren<EsquerdaPlayer>();
-        animacaoPlayer = GetComponentInChildren<AnimacaoPlayer>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
-    }
 
     // Update is called once per frame
     void Update()
     {
+        if(PlayerMng.Instance.movimentacaoHabilitada == false) return;
+        
         Movimentar();
         Pular();
         PularDaParede();
@@ -58,9 +32,9 @@ public class MovimentarPlayer : MonoBehaviour
         //Verificar se o jogador clicou na tecla para pular
         if(Input.GetButtonDown("Jump")){
             //Verificar se o jogador está no chão
-            if(pePlayer.EstaNoChao == true){
+            if(PlayerMng.pePlayer.EstaNoChao == true){
                 //Ativo o pulo
-                animacaoPlayer.PlayJump();
+                PlayerMng.animacaoPlayer.PlayJump();
                 estaPulando = true;
                 puloDuplo = true;
                 AtivarCoroutinePulo();
@@ -68,7 +42,7 @@ public class MovimentarPlayer : MonoBehaviour
             else {
                 //posso fazer um pulo duplo
                 if(puloDuplo == true){
-                    animacaoPlayer.PlayDoubleJump();
+                    PlayerMng.animacaoPlayer.PlayDoubleJump();
                     estaPulando = true;
                     puloDuplo = false;
                     AtivarCoroutinePulo();
@@ -79,16 +53,16 @@ public class MovimentarPlayer : MonoBehaviour
         //Verificar se está habilitado a pular
         if(estaPulando == true){
             //Verificar se a cabeça do jogador está livre
-            if(cabecaPlayer.LimiteDaCabeca == false){
+            if(PlayerMng.cabecaPlayer.LimiteDaCabeca == false){
                 //Fazer o jogador subir para simular o pulo
-                rigidbody2D.velocity = Vector3.zero;
-                rigidbody2D.gravityScale = 0;
+                PlayerMng.rigidbody2D.velocity = Vector3.zero;
+                PlayerMng.rigidbody2D.gravityScale = 0;
                 Vector3 direcaoPulo = new Vector3(forcaDoPuloX,forcaDoPuloY,0);
                 transform.position += direcaoPulo * Time.deltaTime * velocidade;
             }            
         }
         else{
-            rigidbody2D.gravityScale = 4;
+            PlayerMng.rigidbody2D.gravityScale = 4;
         }
     }
 
@@ -112,30 +86,30 @@ public class MovimentarPlayer : MonoBehaviour
         //Obter a entrada do usuário, um teclado de início.
         float eixoX = Input.GetAxis("Horizontal");
 
-        if(eixoX > 0 && direitaPlayer.LimiteDireita == true) {eixoX = 0;}
-        else if(eixoX < 0 && esquerdaPlayer.LimiteEsquerda == true) { eixoX = 0; }
+        if(eixoX > 0 && PlayerMng.direitaPlayer.LimiteDireita == true) {eixoX = 0;}
+        else if(eixoX < 0 && PlayerMng.esquerdaPlayer.LimiteEsquerda == true) { eixoX = 0; }
 
         //Verificar qual posição o player vai andar
         if(eixoX > 0){
-            flipCorpoPlayer.OlharDireita();
+            PlayerMng.flipCorpoPlayer.OlharDireita();
         }
         else if(eixoX < 0){
-            flipCorpoPlayer.OlharEsquerda();
+            PlayerMng.flipCorpoPlayer.OlharEsquerda();
         }
 
         //Verificar se o player está no chão
-        if(pePlayer.EstaNoChao == true){
+        if(PlayerMng.pePlayer.EstaNoChao == true){
             //Verificar se o player está se movendo
             if(eixoX != 0){
-                animacaoPlayer.PlayRun();
+                PlayerMng.animacaoPlayer.PlayRun();
             }
             else{
-                animacaoPlayer.PlayIdle();
+                PlayerMng.animacaoPlayer.PlayIdle();
             }
         }
         else{
             //Ativa animação de queda
-            animacaoPlayer.PlayFall();
+            PlayerMng.animacaoPlayer.PlayFall();
         }
 
         //Declarar uma variável para armazenar a direção do movimento do jogador
@@ -146,13 +120,13 @@ public class MovimentarPlayer : MonoBehaviour
 
     private void PularDaParede(){
         //Verificar se o jogador não está no chão e se ele está em uma das paredes
-        if(pePlayer.EstaNoChao == false && (direitaPlayer.LimiteDireita == true || esquerdaPlayer.LimiteEsquerda == true)){
+        if(PlayerMng.pePlayer.EstaNoChao == false && (PlayerMng.direitaPlayer.LimiteDireita == true || PlayerMng.esquerdaPlayer.LimiteEsquerda == true)){
             //Animação do pulo da parede
-            animacaoPlayer.PlayWallSlider();
+            PlayerMng.animacaoPlayer.PlayWallSlider();
             //Verificar se o jogador clicou em pular
             if(Input.GetButtonDown("Jump")){
-                forcaDoPuloX = flipCorpoPlayer.VisaoEsquerdaOuDireita == true ? forcaDoPuloY : forcaDoPuloY * -1;
-                animacaoPlayer.PlayJump();
+                forcaDoPuloX = PlayerMng.flipCorpoPlayer.VisaoEsquerdaOuDireita == true ? forcaDoPuloY : forcaDoPuloY * -1;
+                PlayerMng.animacaoPlayer.PlayJump();
                 puloDuplo = true;
                 estaPulando = true;
                 AtivarCoroutinePulo();

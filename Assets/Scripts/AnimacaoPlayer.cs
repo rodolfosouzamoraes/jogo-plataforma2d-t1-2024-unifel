@@ -61,4 +61,16 @@ public class AnimacaoPlayer : MonoBehaviour
         animator.SetBool("fall",false);
         animator.SetBool("wallSlider", true);
     }
+
+    public void PlayDamagePlayer(){
+        animator.SetTrigger("damage");
+    }
+
+    public void PlayDeathPlayer(){
+        animator.SetTrigger("death");
+    }
+
+    public void HabilitarMovimentacaoDoJogador(){
+        PlayerMng.Instance.HabilitarMovimentacao();
+    }
 }

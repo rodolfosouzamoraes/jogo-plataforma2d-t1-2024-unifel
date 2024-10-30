@@ -11,7 +11,7 @@ public class DireitaPlayer : MonoBehaviour
     }
 
     //Detecta se o objeto ainda está colidindo
-    private void OnTriggerEnter2D(Collider2D colisor){
+    private void OnTriggerStay2D(Collider2D colisor){
         if(colisor.gameObject.layer == 6){
             limiteDireita = true;
         }
