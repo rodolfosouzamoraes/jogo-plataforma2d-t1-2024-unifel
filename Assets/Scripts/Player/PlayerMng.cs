@@ -60,4 +60,9 @@ public class PlayerMng : MonoBehaviour
     public void DesabilitaMovimentacao(){
         movimentacaoHabilitada = false;
     }
+
+    public void CongelarPlayer(){
+        DesabilitaMovimentacao();
+        animacaoPlayer.PlayIdle();
+    }
 }

@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Chao
-  - 
+  - Coletavel
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PlanoFundo
+    uniqueID: 1894885455
+    locked: 0
+  - name: Elementos
+    uniqueID: 3320055747
+    locked: 0
+  - name: Player
+    uniqueID: 850309687
     locked: 0
