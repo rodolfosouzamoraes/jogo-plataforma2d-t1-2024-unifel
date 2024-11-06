@@ -65,4 +65,11 @@ public class PlayerMng : MonoBehaviour
         DesabilitaMovimentacao();
         animacaoPlayer.PlayIdle();
     }
+
+    public void ExpelirPlayer(){
+        var numeroSorteado = new System.Random().Next(0,2);
+        var x = numeroSorteado == 0 ? - 1000 : 1000;
+        ResetarVelocidadeDaFisica();
+        ArremessarPlayer(x,1000);
+    }
 }

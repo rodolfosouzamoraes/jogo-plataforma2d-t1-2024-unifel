@@ -27,11 +27,13 @@ public class CanvasGameMng : MonoBehaviour
     private int totalItensColetados = 0;
     public float tempoDoLevel;
     private bool fimDoTempo;
+    private int idLevel;
     // Start is called before the first frame update
     void Start()
     {
         vidas = sptsBarraDeVida.Length -1;
         fimDoTempo = false;
+        idLevel = SceneManager.GetActiveScene().buildIndex;
     }
 
     void Update(){
@@ -80,13 +82,13 @@ public class CanvasGameMng : MonoBehaviour
     public void FimDeJogo(){
         fimDoTempo = true;
         PlayerMng.Instance.CongelarPlayer();
+        SalvarDadosDoLevel();
         StartCoroutine(ExibirTelaFinalDoLevel());
     }
 
     private IEnumerator ExibirTelaFinalDoLevel(){
         yield return new WaitForSeconds(3f);
         painelFimDoJogo.SetActive(true);
-
         int contagem = 0;
         while(contagem < totalItensColetados){
             contagem++;
@@ -94,6 +96,13 @@ public class CanvasGameMng : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
+    }
+
+    private void SalvarDadosDoLevel(){
+        int itensSalvosDoLevel = DBMng.BuscarQtdFrutasLevel(idLevel);
+        if(totalItensColetados>itensSalvosDoLevel){
+            DBMng.SalvarDadosLevel(idLevel,totalItensColetados);
+        }
     }
 
     public void VoltarParaMenu(){
