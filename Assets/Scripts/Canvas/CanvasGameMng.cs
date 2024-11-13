@@ -59,6 +59,15 @@ public class CanvasGameMng : MonoBehaviour
         }
     }
 
+    public void MatarJogador(){
+        vidas = 0;
+        imgBarraDeVida.sprite = sptsBarraDeVida[vidas];
+        PlayerMng.animacaoPlayer.PlayDeathPlayer();
+        PlayerMng.Instance.DesabilitaMovimentacao();
+        PlayerMng.Instance.RemoverSimulacaoDaFisica();
+        StartCoroutine(ReiniciarLevel());
+    }
+
     IEnumerator ReiniciarLevel(){
         yield return new WaitForSeconds(3);
         //Game Over - vou reiniciar a cena do jogo

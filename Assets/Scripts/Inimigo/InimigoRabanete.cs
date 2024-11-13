@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InimigoRabanete : MonoBehaviour
@@ -37,6 +38,28 @@ public class InimigoRabanete : MonoBehaviour
             }
             rotinaFlip = StartCoroutine(AguardarParaVirarEMovimentar());
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D colisao){
+        if(colisao.gameObject.tag.Equals("Player") && houveColisao == false){
+            HitEnemy();
+        }
+    }
+    private void OnTriggerStay2D(Collider2D colisao){
+        if(colisao.gameObject.tag.Equals("Player") && houveColisao == false){
+            HitEnemy();
+        }
+    }
+
+    private void HitEnemy(){
+        PlayerMng.playerDano.DanoAoPlayer();
+        animator.SetTrigger("hit");
+        houveColisao = true;
+    }
+
+    public void AtivaAnimacaoAposDano(){
+        animator.SetTrigger(animacaoAtual);
+        houveColisao = false;
     }
 
     IEnumerator AguardarParaVirarEMovimentar(){
