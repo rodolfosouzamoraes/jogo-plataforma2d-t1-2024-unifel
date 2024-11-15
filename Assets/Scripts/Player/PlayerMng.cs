@@ -35,9 +35,15 @@ public class PlayerMng : MonoBehaviour
     }
 
     public bool movimentacaoHabilitada;
+    public int qtdChaves;
+
+    public int QtdChaves{
+        get{return qtdChaves;}
+    }
 
     void Start(){
         movimentacaoHabilitada = false;
+        qtdChaves = 0;
     }
 
     public void ResetarVelocidadeDaFisica(){
@@ -71,5 +77,12 @@ public class PlayerMng : MonoBehaviour
         var x = numeroSorteado == 0 ? - 1000 : 1000;
         ResetarVelocidadeDaFisica();
         ArremessarPlayer(x,1000);
+    }
+
+    public void IncrementarChave(){
+        qtdChaves++;
+    }
+    public void DecrementarChave(){
+        qtdChaves--;
     }
 }

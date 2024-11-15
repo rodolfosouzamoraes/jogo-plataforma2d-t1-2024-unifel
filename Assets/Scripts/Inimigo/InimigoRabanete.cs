@@ -10,8 +10,9 @@ public class InimigoRabanete : MonoBehaviour
     public float velocidade;
     private bool estaParado = false;
     private bool houveColisao = false;
-    private Coroutine rotinaFlip;
     private string animacaoAtual;
+    private float tempoDeEspera = 3;
+    private float proximoTempo = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,12 @@ public class InimigoRabanete : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(estaParado == true) return;
+        if(estaParado == true){
+            if(Time.time > proximoTempo){
+                VirarInimigo();
+            }
+            return;
+        }
         transform.Translate(Vector3.left * Time.deltaTime * velocidade);
     }
 
@@ -32,11 +38,8 @@ public class InimigoRabanete : MonoBehaviour
         if(colisao.gameObject.layer == 6){
             animator.SetTrigger("idle");
             animacaoAtual = "idle";
+            proximoTempo = Time.time + tempoDeEspera;
             estaParado = true;
-            if(rotinaFlip != null){
-                StopCoroutine(rotinaFlip);
-            }
-            rotinaFlip = StartCoroutine(AguardarParaVirarEMovimentar());
         }
     }
 
@@ -62,8 +65,7 @@ public class InimigoRabanete : MonoBehaviour
         houveColisao = false;
     }
 
-    IEnumerator AguardarParaVirarEMovimentar(){
-        yield return new WaitForSeconds(3f);
+    private void VirarInimigo(){
         velocidade *= -1;
         corpo.flipX = !corpo.flipX;
         estaParado = false;
