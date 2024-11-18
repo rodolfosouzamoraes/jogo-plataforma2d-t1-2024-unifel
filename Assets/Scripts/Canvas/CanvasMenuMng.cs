@@ -35,6 +35,7 @@ public class CanvasMenuMng : MonoBehaviour
         ConfigurarPainelNiveis();
         ConfigurarPainelConfiguracao();
         ExibirPainel(0);
+        AudioMng.Instance.PlayAudioMenu();
     }
 
     public void ExibirPainel(int id)

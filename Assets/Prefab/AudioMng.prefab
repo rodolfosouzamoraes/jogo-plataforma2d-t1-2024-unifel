@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioVFX: {fileID: 5151980370602482224}
   audioMusica: {fileID: 5187396749374051014}
+  clipGame: {fileID: 8300000, guid: a1717cfb0d581894ea21c5c512ae5eb6, type: 3}
+  clipMenu: {fileID: 8300000, guid: 07bc87651d8438a4dada9d23813cf1ad, type: 3}
 --- !u!1 &3992417921624449599
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +92,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 07bc87651d8438a4dada9d23813cf1ad, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

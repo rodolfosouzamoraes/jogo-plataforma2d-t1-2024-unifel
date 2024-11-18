@@ -41,6 +41,7 @@ public class CanvasGameMng : MonoBehaviour
         fimDoTempo = false;
         idLevel = SceneManager.GetActiveScene().buildIndex;
         qtdItensColetaveis = FindObjectsOfType<ItemColetavel>().Length;
+        AudioMng.Instance.PlayAudioGame();
     }
 
     void Update(){
