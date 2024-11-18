@@ -24,10 +24,16 @@ public class CanvasMenuMng : MonoBehaviour
     public Sprite[] sptsMedalhas;
 
     public GameObject[] paineis;
+
+    public Slider volumeVFX;
+    public Slider volumeMusica;
+
+    private Volume volumes;
     // Start is called before the first frame update
     void Start()
     {
         ConfigurarPainelNiveis();
+        ConfigurarPainelConfiguracao();
         ExibirPainel(0);
     }
 
@@ -43,6 +49,14 @@ public class CanvasMenuMng : MonoBehaviour
     public void FecharJogo()
     {
         Application.Quit();
+    }
+
+    private void ConfigurarPainelConfiguracao()
+    {
+        volumes = DBMng.ObterVolumes();
+        volumeVFX.value = volumes.vfx;
+        volumeMusica.value = volumes.musica;
+        AudioMng.Instance.MudarVolume(volumes);
     }
 
     private void ConfigurarPainelNiveis()
@@ -80,5 +94,23 @@ public class CanvasMenuMng : MonoBehaviour
         if(cadeados[idLevel].activeSelf == false){
             SceneManager.LoadScene(idLevel);
         }        
+    }
+
+    public void MudarVolumeVFX()
+    {
+        DBMng.SalvarVolume(volumeVFX.value, volumes.musica);
+        AtualizarVolumes();
+    }
+
+    public void MudarVolumeMusica()
+    {
+        DBMng.SalvarVolume(volumes.vfx, volumeMusica.value);
+        AtualizarVolumes();
+    }
+
+    private void AtualizarVolumes()
+    {
+        volumes = DBMng.ObterVolumes();
+        AudioMng.Instance.MudarVolume(volumes);
     }
 }
