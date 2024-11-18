@@ -22,25 +22,52 @@ public class CanvasMenuMng : MonoBehaviour
     public GameObject[] medalhas;
 
     public Sprite[] sptsMedalhas;
+
+    public GameObject[] paineis;
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 1; i< txtsQtdItensColetadosDosNiveis.Length;i++){
-            txtsQtdItensColetadosDosNiveis[i].text = "x"+DBMng.BuscarQtdFrutasLevel(i).ToString();
+        ConfigurarPainelNiveis();
+        ExibirPainel(0);
+    }
+
+    public void ExibirPainel(int id)
+    {
+        foreach (var painel in paineis) 
+        { 
+            painel.SetActive(false);
+        }
+        paineis[id].SetActive(true);
+    }
+
+    public void FecharJogo()
+    {
+        Application.Quit();
+    }
+
+    private void ConfigurarPainelNiveis()
+    {
+        for (int i = 1; i < txtsQtdItensColetadosDosNiveis.Length; i++)
+        {
+            txtsQtdItensColetadosDosNiveis[i].text = "x" + DBMng.BuscarQtdFrutasLevel(i).ToString();
         }
 
-        for(int i = 2; i<cadeados.Length;i++){
+        for (int i = 2; i < cadeados.Length; i++)
+        {
             bool estaHabilitado = DBMng.BuscarLevelHabilitado(i) == 1 ? true : false;
             cadeados[i].SetActive(!estaHabilitado);
             qtdsItemLevel[i].SetActive(estaHabilitado);
         }
 
-        for(int i = 1; i< medalhas.Length; i++){
+        for (int i = 1; i < medalhas.Length; i++)
+        {
             int medalhaDoLevel = DBMng.BuscarMedalhaLevel(i);
-            if(medalhaDoLevel == 0){
+            if (medalhaDoLevel == 0)
+            {
                 medalhas[i].SetActive(false);
             }
-            else{
+            else
+            {
                 medalhas[i].GetComponent<Image>().sprite = sptsMedalhas[medalhaDoLevel];
             }
         }
