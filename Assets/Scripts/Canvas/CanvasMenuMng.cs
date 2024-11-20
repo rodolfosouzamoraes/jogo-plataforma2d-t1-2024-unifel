@@ -89,10 +89,12 @@ public class CanvasMenuMng : MonoBehaviour
     }
 
     public void IniciaLevel1(){
-        SceneManager.LoadScene(1);
+        PlayAudioClick();
+        SceneManager.LoadScene(1);        
     }
     public void IniciarLevel(int idLevel){
         if(cadeados[idLevel].activeSelf == false){
+            PlayAudioClick();
             SceneManager.LoadScene(idLevel);
         }        
     }
@@ -113,5 +115,10 @@ public class CanvasMenuMng : MonoBehaviour
     {
         volumes = DBMng.ObterVolumes();
         AudioMng.Instance.MudarVolume(volumes);
+    }
+
+    public void PlayAudioClick()
+    {
+        AudioMng.Instance.PlayAudioClick();
     }
 }

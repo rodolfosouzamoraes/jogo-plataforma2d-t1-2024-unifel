@@ -39,11 +39,13 @@ public class InimigoPlanta : MonoBehaviour
             transform.position.y+0.14f,0);
             projetilCriado.GetComponent<ProjetilPlanta>().MudarDirecao(Vector3.left);
         }
+        AudioMng.Instance.PlayAudioProjetil();
     }
 
     private void OnTriggerEnter2D(Collider2D colisao){
         if(colisao.gameObject.tag.Equals("Player") && teveDano == false){
             PlayerMng.playerDano.DanoAoPlayer();
+            AudioMng.Instance.PlayAudioDanoInimigo();
             teveDano = true;
             animator.SetTrigger("hit");
         }

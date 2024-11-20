@@ -35,6 +35,7 @@ public class MovimentarPlayer : MonoBehaviour
             if(PlayerMng.pePlayer.EstaNoChao == true){
                 //Ativo o pulo
                 PlayerMng.animacaoPlayer.PlayJump();
+                AudioMng.Instance.PlayAudioPular();
                 estaPulando = true;
                 puloDuplo = true;
                 AtivarCoroutinePulo();
@@ -43,6 +44,7 @@ public class MovimentarPlayer : MonoBehaviour
                 //posso fazer um pulo duplo
                 if(puloDuplo == true){
                     PlayerMng.animacaoPlayer.PlayDoubleJump();
+                    AudioMng.Instance.PlayAudioPular();
                     estaPulando = true;
                     puloDuplo = false;
                     AtivarCoroutinePulo();
@@ -127,6 +129,7 @@ public class MovimentarPlayer : MonoBehaviour
             if(Input.GetButtonDown("Jump")){
                 forcaDoPuloX = PlayerMng.flipCorpoPlayer.VisaoEsquerdaOuDireita == true ? forcaDoPuloY : forcaDoPuloY * -1;
                 PlayerMng.animacaoPlayer.PlayJump();
+                AudioMng.Instance.PlayAudioPular();
                 puloDuplo = true;
                 estaPulando = true;
                 AtivarCoroutinePulo();

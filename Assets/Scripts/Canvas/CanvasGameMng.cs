@@ -41,6 +41,8 @@ public class CanvasGameMng : MonoBehaviour
         fimDoTempo = false;
         idLevel = SceneManager.GetActiveScene().buildIndex;
         qtdItensColetaveis = FindObjectsOfType<ItemColetavel>().Length;
+        Volume volumes = DBMng.ObterVolumes();
+        AudioMng.Instance.MudarVolume(volumes);
         AudioMng.Instance.PlayAudioGame();
     }
 
@@ -63,6 +65,7 @@ public class CanvasGameMng : MonoBehaviour
         vidas = 0;
         imgBarraDeVida.sprite = sptsBarraDeVida[vidas];
         PlayerMng.animacaoPlayer.PlayDeathPlayer();
+        AudioMng.Instance.PlayAudioMortePlayer();
         PlayerMng.Instance.DesabilitaMovimentacao();
         PlayerMng.Instance.RemoverSimulacaoDaFisica();
         StartCoroutine(ReiniciarLevel());
@@ -103,6 +106,7 @@ public class CanvasGameMng : MonoBehaviour
 
     private IEnumerator ExibirTelaFinalDoLevel(){
         yield return new WaitForSeconds(3f);
+        AudioMng.Instance.PlayAudioTelaGame();
         painelFimDoJogo.SetActive(true);
         int contagem = 0;
         while(contagem < totalItensColetados){
@@ -145,5 +149,10 @@ public class CanvasGameMng : MonoBehaviour
             medalhaDoLevel = 3;
         }
         imgMedalhaDoLevel.sprite = sptsMedalhas[medalhaDoLevel];
+    }
+
+    public void PlayAudioClick()
+    {
+        AudioMng.Instance.PlayAudioClick();
     }
 }

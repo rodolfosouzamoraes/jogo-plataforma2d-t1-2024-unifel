@@ -18,6 +18,7 @@ public class DanoChefe : MonoBehaviour
         {
             houveColisao = true;
             PlayerMng.Instance.ExpelirPlayer();
+            AudioMng.Instance.PlayAudioDanoInimigo();
             chefeMng.DecrementarVidaChefe();
             StartCoroutine(PermitirColisao());
         }

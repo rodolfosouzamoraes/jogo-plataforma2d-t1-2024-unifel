@@ -14,6 +14,7 @@ public class ItemColetavel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D colisao){
         if(colisao.gameObject.tag.Equals("Player") && coletouItem == false){
+            AudioMng.Instance.PlayAudioFruta();
             animator.SetTrigger("coletarItem");
             coletouItem = true;
             

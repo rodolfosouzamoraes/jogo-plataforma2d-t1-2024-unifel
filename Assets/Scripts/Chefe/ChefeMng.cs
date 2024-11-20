@@ -34,6 +34,7 @@ public class ChefeMng : MonoBehaviour
                 Destroy(colisao);
             }
             animator.SetTrigger("death");
+            AudioMng.Instance.PlayAudioMorteChefe();
         }
         else
         {

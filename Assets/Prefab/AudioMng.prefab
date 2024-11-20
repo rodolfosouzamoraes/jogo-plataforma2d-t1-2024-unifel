@@ -50,6 +50,24 @@ MonoBehaviour:
   audioMusica: {fileID: 5187396749374051014}
   clipGame: {fileID: 8300000, guid: a1717cfb0d581894ea21c5c512ae5eb6, type: 3}
   clipMenu: {fileID: 8300000, guid: 07bc87651d8438a4dada9d23813cf1ad, type: 3}
+  clipClick: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+  clipFruta: {fileID: 8300000, guid: 81652031b64c342cc8dbc59c138d77c5, type: 3}
+  clipsDanos:
+  - {fileID: 8300000, guid: 1eb27f06f882d234dbcfacf368c6befe, type: 3}
+  - {fileID: 8300000, guid: 07c60d88f3fb1e74bb3da47abd7e6729, type: 3}
+  - {fileID: 8300000, guid: c8a835b615f0f704ba952212b0bb2d0b, type: 3}
+  clipPular: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+  clipCorrer: {fileID: 8300000, guid: d8d04c6f80a1140db85ede568dab1f51, type: 3}
+  clipChave: {fileID: 8300000, guid: c5a2afc4941628540b9a40f258a11487, type: 3}
+  clipChefe: {fileID: 8300000, guid: 81117351589a64942b0a8ce3f6110c3d, type: 3}
+  clipSurgir: {fileID: 8300000, guid: 4e1ff8faed12a475eba9be0e46072269, type: 3}
+  clipProjetil: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  clipTelaGame: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  clipDanoInimigo: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
+  clipItemFinal: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
+  clipMortePlayer: {fileID: 8300000, guid: e1a75776f005439469f89a17a986c567, type: 3}
+  clipPortao: {fileID: 8300000, guid: e0ed49f0072d1164498ca937529a05ea, type: 3}
+  clipMorteChefe: {fileID: 8300000, guid: 1c0d8bbcae35bc948b0a868f0b15f96c, type: 3}
 --- !u!1 &3992417921624449599
 GameObject:
   m_ObjectHideFlags: 0

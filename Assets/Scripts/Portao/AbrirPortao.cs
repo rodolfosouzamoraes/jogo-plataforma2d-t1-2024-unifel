@@ -22,10 +22,10 @@ public class AbrirPortao : MonoBehaviour
     }
     
     private void OnCollisionEnter2D(Collision2D colisao){
-        Debug.Log($"Objeto Colidido: {colisao.gameObject.tag}");
         if(colisao.gameObject.tag.Equals("Player") && 
         abriuPortao == false &&
         PlayerMng.Instance.QtdChaves > 0){
+            AudioMng.Instance.PlayAudioPortao();
             abriuPortao = true;
             fechadura.SetActive(false);
             PlayerMng.Instance.DecrementarChave();

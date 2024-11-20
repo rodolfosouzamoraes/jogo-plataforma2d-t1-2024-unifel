@@ -9,5 +9,6 @@ public class InicioDoLevel : MonoBehaviour
     void Start()
     {
         PlayerMng.Instance.gameObject.transform.position = posicaoInicialPlayer.transform.position;
+        AudioMng.Instance.PlayAudioSurgir();
     }
 }

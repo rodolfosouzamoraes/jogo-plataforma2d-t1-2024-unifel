@@ -15,6 +15,7 @@ public class ZonaChefe : MonoBehaviour
     {
         if(colisao.gameObject.layer == 10)
         {
+            AudioMng.Instance.PlayAudioChefe();
             chefeMng.HabilitaMovimentacao();
             Destroy(gameObject);
         }

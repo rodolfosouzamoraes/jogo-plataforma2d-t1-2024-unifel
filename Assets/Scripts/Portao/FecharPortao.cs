@@ -39,6 +39,7 @@ public class FecharPortao : MonoBehaviour
     private void AtivaFechadura()
     {
         fechadura.SetActive(true);
+        AudioMng.Instance.PlayAudioPortao();
     }
 
     private void MudarLayer()

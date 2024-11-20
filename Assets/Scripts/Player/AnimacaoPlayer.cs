@@ -73,4 +73,9 @@ public class AnimacaoPlayer : MonoBehaviour
     public void HabilitarMovimentacaoDoJogador(){
         PlayerMng.Instance.HabilitarMovimentacao();
     }
+
+    public void PlayAudioMovimentacao()
+    {
+        AudioMng.Instance.PlayAudioCorrer();
+    }
 }
