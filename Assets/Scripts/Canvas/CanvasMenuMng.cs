@@ -36,6 +36,7 @@ public class CanvasMenuMng : MonoBehaviour
         ConfigurarPainelConfiguracao();
         ExibirPainel(0);
         AudioMng.Instance.PlayAudioMenu();
+        CanvasCarregandoMng.Instance.OcultarPainelCarregando();
     }
 
     public void ExibirPainel(int id)
@@ -90,11 +91,13 @@ public class CanvasMenuMng : MonoBehaviour
 
     public void IniciaLevel1(){
         PlayAudioClick();
+        CanvasCarregandoMng.Instance.ExibirPainelCarregando();
         SceneManager.LoadScene(1);        
     }
     public void IniciarLevel(int idLevel){
         if(cadeados[idLevel].activeSelf == false){
             PlayAudioClick();
+            CanvasCarregandoMng.Instance.ExibirPainelCarregando();
             SceneManager.LoadScene(idLevel);
         }        
     }

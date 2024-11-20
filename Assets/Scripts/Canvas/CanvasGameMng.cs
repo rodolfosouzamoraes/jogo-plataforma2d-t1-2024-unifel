@@ -44,9 +44,13 @@ public class CanvasGameMng : MonoBehaviour
         Volume volumes = DBMng.ObterVolumes();
         AudioMng.Instance.MudarVolume(volumes);
         AudioMng.Instance.PlayAudioGame();
+        CanvasCarregandoMng.Instance.OcultarPainelCarregando();
     }
 
     void Update(){
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            VoltarParaMenu();
+        }
         ContarTempo();
     }
 
@@ -126,6 +130,7 @@ public class CanvasGameMng : MonoBehaviour
     }
 
     public void VoltarParaMenu(){
+        CanvasCarregandoMng.Instance.ExibirPainelCarregando();
         SceneManager.LoadScene(0);
     }
 
@@ -133,7 +138,14 @@ public class CanvasGameMng : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void ReiniciarLevelPelaTela()
+    {
+        CanvasCarregandoMng.Instance.ExibirPainelCarregando();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void ProximoLevel(){
+        CanvasCarregandoMng.Instance.ExibirPainelCarregando();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 

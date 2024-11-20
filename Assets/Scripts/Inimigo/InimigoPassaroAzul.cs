@@ -39,7 +39,7 @@ public class InimigoPassaroAzul : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D colisao){
-        if(colisao.gameObject.tag.Equals("Player") && estaMorto == false){
+        if(colisao.gameObject.tag.Equals("PePlayer") && estaMorto == false){
             AudioMng.Instance.PlayAudioDanoInimigo();
             PlayerMng.Instance.ExpelirPlayer();
             animator.SetTrigger("morte");
