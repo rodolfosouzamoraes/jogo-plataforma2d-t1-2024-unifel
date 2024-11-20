@@ -6,7 +6,7 @@ public class DanoSpike : MonoBehaviour
 {
     bool houveColisao = false;
     private void OnTriggerEnter2D(Collider2D colisao){
-        if(colisao.gameObject.tag == "Player" && houveColisao == false){
+        if(colisao.gameObject.layer == 10 && houveColisao == false){
             houveColisao = true;
             PlayerMng.playerDano.DanoAoPlayer();
             StartCoroutine(PermitirColisao());

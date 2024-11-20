@@ -44,12 +44,12 @@ public class InimigoRabanete : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D colisao){
-        if(colisao.gameObject.tag.Equals("Player") && houveColisao == false){
+        if(colisao.gameObject.layer == 10 && houveColisao == false){
             HitEnemy();
         }
     }
     private void OnTriggerStay2D(Collider2D colisao){
-        if(colisao.gameObject.tag.Equals("Player") && houveColisao == false){
+        if(colisao.gameObject.layer == 10 && houveColisao == false){
             HitEnemy();
         }
     }

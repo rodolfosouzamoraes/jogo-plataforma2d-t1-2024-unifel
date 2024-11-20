@@ -42,7 +42,7 @@ public class InimigoPlanta : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D colisao){
-        if(colisao.gameObject.tag.Equals("Player") && teveDano == false){
+        if(colisao.gameObject.layer == 10 && teveDano == false){
             PlayerMng.playerDano.DanoAoPlayer();
             teveDano = true;
             animator.SetTrigger("hit");

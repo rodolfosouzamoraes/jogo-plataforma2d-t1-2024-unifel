@@ -32,6 +32,7 @@ public class CanvasGameMng : MonoBehaviour
     private int idLevel;
     private double qtdItensColetaveis;
     private int medalhaDoLevel;
+    public bool jogadorMorreu = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,10 +50,7 @@ public class CanvasGameMng : MonoBehaviour
     public void DecrementarVidaJogador(){
         vidas--;
         if(vidas < 0){
-            PlayerMng.animacaoPlayer.PlayDeathPlayer();
-            PlayerMng.Instance.DesabilitaMovimentacao();
-            PlayerMng.Instance.RemoverSimulacaoDaFisica();
-            StartCoroutine(ReiniciarLevel());
+            MatarJogador();
         }
         else{
             imgBarraDeVida.sprite = sptsBarraDeVida[vidas];
@@ -60,6 +58,7 @@ public class CanvasGameMng : MonoBehaviour
     }
 
     public void MatarJogador(){
+        jogadorMorreu = true;
         vidas = 0;
         imgBarraDeVida.sprite = sptsBarraDeVida[vidas];
         PlayerMng.animacaoPlayer.PlayDeathPlayer();
