@@ -6,6 +6,7 @@ using System;
 public class PlayerDano : MonoBehaviour
 {
     public void DanoAoPlayer(){
+        if (CanvasGameMng.Instance.fimDoTempo == true) return;
         //Sortear a direção para expelir o jogador
         System.Random random = new System.Random();
         int valorSorteado = random.Next(0,2);

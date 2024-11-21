@@ -28,7 +28,7 @@ public class CanvasGameMng : MonoBehaviour
     private int vidas; 
     private int totalItensColetados = 0;
     public float tempoDoLevel;
-    private bool fimDoTempo;
+    public bool fimDoTempo;
     private int idLevel;
     private double qtdItensColetaveis;
     private int medalhaDoLevel;
