@@ -17,6 +17,13 @@ public class MovimentarPlayer : MonoBehaviour
     //Uma variável de Coroutine
     private Coroutine coroutinePulo;
 
+    private bool habilitaPulo;
+
+    private void Start()
+    {
+        puloDuplo = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -32,10 +39,11 @@ public class MovimentarPlayer : MonoBehaviour
         //Verificar se o jogador clicou na tecla para pular
         if(Input.GetButtonDown("Jump")){
             //Verificar se o jogador está no chão
-            if(PlayerMng.pePlayer.EstaNoChao == true){
+            if(habilitaPulo == true){
                 //Ativo o pulo
                 PlayerMng.animacaoPlayer.PlayJump();
                 AudioMng.Instance.PlayAudioPular();
+                habilitaPulo = false;
                 estaPulando = true;
                 puloDuplo = true;
                 AtivarCoroutinePulo();
@@ -135,5 +143,10 @@ public class MovimentarPlayer : MonoBehaviour
                 AtivarCoroutinePulo();
             }
         }
+    }
+
+    public void HabilitaPulo()
+    {
+        habilitaPulo = true;
     }
 }
