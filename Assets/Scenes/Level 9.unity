@@ -11167,6 +11167,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InimigoPlanta (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1873089074321376521, guid: d7cc17d7ae07b654cb7e8bca2ee1fb23, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2331636241257530561, guid: d7cc17d7ae07b654cb7e8bca2ee1fb23, type: 3}
       propertyPath: m_FlipX
       value: 1
@@ -13566,6 +13570,10 @@ PrefabInstance:
     - target: {fileID: 1873089074321376521, guid: d7cc17d7ae07b654cb7e8bca2ee1fb23, type: 3}
       propertyPath: m_Name
       value: InimigoPlanta
+      objectReference: {fileID: 0}
+    - target: {fileID: 1873089074321376521, guid: d7cc17d7ae07b654cb7e8bca2ee1fb23, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8243403592332742081, guid: d7cc17d7ae07b654cb7e8bca2ee1fb23, type: 3}
       propertyPath: m_LocalPosition.x

@@ -130,7 +130,7 @@ public class MovimentarPlayer : MonoBehaviour
 
     private void PularDaParede(){
         //Verificar se o jogador não está no chão e se ele está em uma das paredes
-        if(PlayerMng.pePlayer.EstaNoChao == false && (PlayerMng.direitaPlayer.LimiteDireita == true || PlayerMng.esquerdaPlayer.LimiteEsquerda == true)){
+        if(PlayerMng.pePlayer.EstaNoChao == false && PlayerMng.cabecaPlayer.LimiteDaCabeca == false &&  (PlayerMng.direitaPlayer.LimiteDireita == true || PlayerMng.esquerdaPlayer.LimiteEsquerda == true)){
             //Animação do pulo da parede
             PlayerMng.animacaoPlayer.PlayWallSlider();
             //Verificar se o jogador clicou em pular
@@ -148,5 +148,15 @@ public class MovimentarPlayer : MonoBehaviour
     public void HabilitaPulo()
     {
         habilitaPulo = true;
+    }
+
+    public void CancelarPulo()
+    {
+        if (coroutinePulo != null)
+        {
+            StopCoroutine(coroutinePulo);
+        }
+        forcaDoPuloX = 0;
+        estaPulando = false;
     }
 }
