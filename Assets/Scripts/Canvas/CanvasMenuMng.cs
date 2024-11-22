@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,9 +20,31 @@ public class CanvasMenuMng : MonoBehaviour
     public GameObject[] medalhas;
 
     public Sprite[] sptsMedalhas;
+
+    public GameObject[] paineis;
+
+    public Slider sldVFX;
+    public Slider sldMusica;
+
+    private Volume volumes;
     // Start is called before the first frame update
     void Start()
     {
+        ConfigurarPainelNivel();
+        ConfigurarPainelConfiguracoes();
+        ExibirPainel(0);
+        AudioMng.Instance.PlayAudioMenu();
+        CanvasLoadingMng.Instance.OcultarPainelLoading();
+    }
+
+    private void ConfigurarPainelConfiguracoes(){
+        volumes = DBMng.ObterVolumes();
+        sldVFX.value = volumes.vfx;
+        sldMusica.value = volumes.musica;
+        AudioMng.Instance.MudarVolumes(volumes);//Atualizar os volumes no jogo
+    }
+
+    private void ConfigurarPainelNivel(){
         for(int i = 1; i< txtsQtdItensColetadosDosNiveis.Length;i++){
             txtsQtdItensColetadosDosNiveis[i].text = "x"+DBMng.BuscarQtdFrutasLevel(i).ToString();
         }
@@ -47,11 +67,39 @@ public class CanvasMenuMng : MonoBehaviour
     }
 
     public void IniciaLevel1(){
-        SceneManager.LoadScene(1);
+        CanvasLoadingMng.Instance.ExibirPainelLoading();
+        SceneManager.LoadScene(1);        
     }
     public void IniciarLevel(int idLevel){
         if(cadeados[idLevel].activeSelf == false){
+            CanvasLoadingMng.Instance.ExibirPainelLoading();
             SceneManager.LoadScene(idLevel);
         }        
+    }
+
+    public void ExibirPainel(int id){
+        foreach(var painel in paineis){
+            painel.SetActive(false);
+        }
+        paineis[id].SetActive(true);
+    }
+
+    public void FecharJogo(){
+        Application.Quit();
+    }
+
+    public void MudarVolumeVFX(){
+        DBMng.SalvarVolume(sldVFX.value, volumes.musica);
+        AtualizarVolumes();
+    }
+
+    public void MudarVolumeMusica(){
+        DBMng.SalvarVolume(volumes.vfx, sldMusica.value);
+        AtualizarVolumes();
+    }
+
+    private void AtualizarVolumes(){
+        volumes = DBMng.ObterVolumes();
+        AudioMng.Instance.MudarVolumes(volumes);//Atualizar os volumes no jogo
     }
 }

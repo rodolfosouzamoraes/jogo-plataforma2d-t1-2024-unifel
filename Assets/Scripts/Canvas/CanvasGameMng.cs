@@ -28,7 +28,7 @@ public class CanvasGameMng : MonoBehaviour
     private int vidas; 
     private int totalItensColetados = 0;
     public float tempoDoLevel;
-    private bool fimDoTempo;
+    public bool fimDoTempo;
     private int idLevel;
     private double qtdItensColetaveis;
     private int medalhaDoLevel;
@@ -41,9 +41,16 @@ public class CanvasGameMng : MonoBehaviour
         fimDoTempo = false;
         idLevel = SceneManager.GetActiveScene().buildIndex;
         qtdItensColetaveis = FindObjectsOfType<ItemColetavel>().Length;
+        Volume volumes = DBMng.ObterVolumes();
+        AudioMng.Instance.MudarVolumes(volumes);
+        AudioMng.Instance.PlayAudioGame();
+        CanvasLoadingMng.Instance.OcultarPainelLoading();
     }
 
     void Update(){
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            VoltarParaMenu();
+        }
         ContarTempo();
     }
 
@@ -121,6 +128,7 @@ public class CanvasGameMng : MonoBehaviour
     }
 
     public void VoltarParaMenu(){
+        CanvasLoadingMng.Instance.ExibirPainelLoading();
         SceneManager.LoadScene(0);
     }
 
@@ -128,7 +136,13 @@ public class CanvasGameMng : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void ReiniciarLevelPelaTela(){
+        CanvasLoadingMng.Instance.ExibirPainelLoading();
+        ReiniciarLevelAtual();
+    }
+
     public void ProximoLevel(){
+        CanvasLoadingMng.Instance.ExibirPainelLoading();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 

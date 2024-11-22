@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MovimentarPlayer : MonoBehaviour
@@ -17,6 +18,12 @@ public class MovimentarPlayer : MonoBehaviour
     //Uma variável de Coroutine
     private Coroutine coroutinePulo;
 
+    private bool habilitaPulo;
+
+    void Start(){
+        puloDuplo = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -31,10 +38,12 @@ public class MovimentarPlayer : MonoBehaviour
     private void Pular(){
         //Verificar se o jogador clicou na tecla para pular
         if(Input.GetButtonDown("Jump")){
-            //Verificar se o jogador está no chão
-            if(PlayerMng.pePlayer.EstaNoChao == true){
+            //Verificar se o jogador está apto a pular
+            if(habilitaPulo == true){
                 //Ativo o pulo
                 PlayerMng.animacaoPlayer.PlayJump();
+                AudioMng.Instance.PlayAudioPular();
+                habilitaPulo = false;
                 estaPulando = true;
                 puloDuplo = true;
                 AtivarCoroutinePulo();
@@ -43,6 +52,7 @@ public class MovimentarPlayer : MonoBehaviour
                 //posso fazer um pulo duplo
                 if(puloDuplo == true){
                     PlayerMng.animacaoPlayer.PlayDoubleJump();
+                    AudioMng.Instance.PlayAudioPular();
                     estaPulando = true;
                     puloDuplo = false;
                     AtivarCoroutinePulo();
@@ -120,17 +130,30 @@ public class MovimentarPlayer : MonoBehaviour
 
     private void PularDaParede(){
         //Verificar se o jogador não está no chão e se ele está em uma das paredes
-        if(PlayerMng.pePlayer.EstaNoChao == false && (PlayerMng.direitaPlayer.LimiteDireita == true || PlayerMng.esquerdaPlayer.LimiteEsquerda == true)){
+        if(PlayerMng.pePlayer.EstaNoChao == false && PlayerMng.cabecaPlayer.LimiteDaCabeca == false && (PlayerMng.direitaPlayer.LimiteDireita == true || PlayerMng.esquerdaPlayer.LimiteEsquerda == true)){
             //Animação do pulo da parede
             PlayerMng.animacaoPlayer.PlayWallSlider();
             //Verificar se o jogador clicou em pular
             if(Input.GetButtonDown("Jump")){
                 forcaDoPuloX = PlayerMng.flipCorpoPlayer.VisaoEsquerdaOuDireita == true ? forcaDoPuloY : forcaDoPuloY * -1;
                 PlayerMng.animacaoPlayer.PlayJump();
+                AudioMng.Instance.PlayAudioPular();
                 puloDuplo = true;
                 estaPulando = true;
                 AtivarCoroutinePulo();
             }
         }
+    }
+
+    public void HabilitaPulo(){
+        habilitaPulo = true;
+    }
+
+    public void CancelarPulo(){
+        if(coroutinePulo != null){
+            StopCoroutine(coroutinePulo);
+        }
+        forcaDoPuloX = 0;
+        estaPulando = false;
     }
 }
