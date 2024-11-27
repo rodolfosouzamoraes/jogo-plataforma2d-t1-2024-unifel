@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioMng : MonoBehaviour
@@ -18,7 +15,6 @@ public class AudioMng : MonoBehaviour
 
     public AudioSource audioVFX;
     public AudioSource audioMusica;
-
     public AudioClip clipGame;
     public AudioClip clipMenu;
     public AudioClip clipClick;

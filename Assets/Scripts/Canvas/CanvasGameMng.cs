@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -33,7 +32,7 @@ public class CanvasGameMng : MonoBehaviour
     private double qtdItensColetaveis;
     private int medalhaDoLevel;
     public bool jogadorMorreu = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         vidas = sptsBarraDeVida.Length -1;
@@ -69,6 +68,7 @@ public class CanvasGameMng : MonoBehaviour
         vidas = 0;
         imgBarraDeVida.sprite = sptsBarraDeVida[vidas];
         PlayerMng.animacaoPlayer.PlayDeathPlayer();
+        AudioMng.Instance.PlayAudioMortePlayer();
         PlayerMng.Instance.DesabilitaMovimentacao();
         PlayerMng.Instance.RemoverSimulacaoDaFisica();
         StartCoroutine(ReiniciarLevel());
@@ -76,7 +76,6 @@ public class CanvasGameMng : MonoBehaviour
 
     IEnumerator ReiniciarLevel(){
         yield return new WaitForSeconds(3);
-        //Game Over - vou reiniciar a cena do jogo
         ReiniciarLevelAtual();
     }
 
@@ -95,7 +94,6 @@ public class CanvasGameMng : MonoBehaviour
             DecrementarVidaJogador();
         }
         else{
-            //Exibir o tempo na tela
             txtTempoDeJogo.text = ((int)tempoDoLevel).ToString();
         }
     }
@@ -128,6 +126,7 @@ public class CanvasGameMng : MonoBehaviour
     }
 
     public void VoltarParaMenu(){
+        AudioMng.Instance.PlayAudioClick();
         CanvasLoadingMng.Instance.ExibirPainelLoading();
         SceneManager.LoadScene(0);
     }
@@ -137,11 +136,13 @@ public class CanvasGameMng : MonoBehaviour
     }
 
     public void ReiniciarLevelPelaTela(){
+        AudioMng.Instance.PlayAudioClick();
         CanvasLoadingMng.Instance.ExibirPainelLoading();
         ReiniciarLevelAtual();
     }
 
     public void ProximoLevel(){
+        AudioMng.Instance.PlayAudioClick();
         CanvasLoadingMng.Instance.ExibirPainelLoading();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }

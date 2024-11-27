@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMng : MonoBehaviour
@@ -13,9 +11,7 @@ public class PlayerMng : MonoBehaviour
     public static EsquerdaPlayer esquerdaPlayer;
     public static MovimentarPlayer movimentarPlayer;
     public static PlayerDano playerDano;
-    //Variável do rigidbody2D
-    public static Rigidbody2D rigidbody2D;
-
+    public static Rigidbody2D rigidBody2D;
 
     void Awake(){
         if(Instance == null){
@@ -27,7 +23,7 @@ public class PlayerMng : MonoBehaviour
             esquerdaPlayer = GetComponentInChildren<EsquerdaPlayer>();
             movimentarPlayer = GetComponent<MovimentarPlayer>();
             playerDano = GetComponent<PlayerDano>();
-            rigidbody2D = GetComponent<Rigidbody2D>();
+            rigidBody2D = GetComponent<Rigidbody2D>();
             Instance = this;
             return;
         }
@@ -47,16 +43,16 @@ public class PlayerMng : MonoBehaviour
     }
 
     public void ResetarVelocidadeDaFisica(){
-        rigidbody2D.velocity = Vector3.zero;
+        rigidBody2D.velocity = Vector3.zero;
     }
 
     public void ArremessarPlayer(int x, int y){
-        rigidbody2D.AddForce(new Vector2(x,y));
+        rigidBody2D.AddForce(new Vector2(x,y));
     }
 
     public void RemoverSimulacaoDaFisica(){
         ResetarVelocidadeDaFisica();
-        rigidbody2D.simulated = false;
+        rigidBody2D.simulated = false;
     }
 
     public void HabilitarMovimentacao(){

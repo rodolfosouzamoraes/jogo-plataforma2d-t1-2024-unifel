@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemColetavel : MonoBehaviour
@@ -15,9 +12,8 @@ public class ItemColetavel : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D colisao){
         if(colisao.gameObject.tag.Equals("Player") && coletouItem == false){
             animator.SetTrigger("coletarItem");
+            AudioMng.Instance.PlayAudioFruta();
             coletouItem = true;
-            
-            //Incrementar a coleta no jogo
             CanvasGameMng.Instance.IncrementarItemColetavel();
         }
     }

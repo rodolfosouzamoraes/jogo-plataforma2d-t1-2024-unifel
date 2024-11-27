@@ -27,12 +27,11 @@ public class CanvasMenuMng : MonoBehaviour
     public Slider sldMusica;
 
     private Volume volumes;
-    // Start is called before the first frame update
+
     void Start()
     {
         ConfigurarPainelNivel();
         ConfigurarPainelConfiguracoes();
-        ExibirPainel(0);
         AudioMng.Instance.PlayAudioMenu();
         CanvasLoadingMng.Instance.OcultarPainelLoading();
     }
@@ -41,7 +40,7 @@ public class CanvasMenuMng : MonoBehaviour
         volumes = DBMng.ObterVolumes();
         sldVFX.value = volumes.vfx;
         sldMusica.value = volumes.musica;
-        AudioMng.Instance.MudarVolumes(volumes);//Atualizar os volumes no jogo
+        AudioMng.Instance.MudarVolumes(volumes);
     }
 
     private void ConfigurarPainelNivel(){
@@ -67,17 +66,20 @@ public class CanvasMenuMng : MonoBehaviour
     }
 
     public void IniciaLevel1(){
+        AudioMng.Instance.PlayAudioClick();
         CanvasLoadingMng.Instance.ExibirPainelLoading();
         SceneManager.LoadScene(1);        
     }
     public void IniciarLevel(int idLevel){
         if(cadeados[idLevel].activeSelf == false){
+            AudioMng.Instance.PlayAudioClick();
             CanvasLoadingMng.Instance.ExibirPainelLoading();
             SceneManager.LoadScene(idLevel);
         }        
     }
 
     public void ExibirPainel(int id){
+        AudioMng.Instance.PlayAudioClick();
         foreach(var painel in paineis){
             painel.SetActive(false);
         }
@@ -100,6 +102,6 @@ public class CanvasMenuMng : MonoBehaviour
 
     private void AtualizarVolumes(){
         volumes = DBMng.ObterVolumes();
-        AudioMng.Instance.MudarVolumes(volumes);//Atualizar os volumes no jogo
+        AudioMng.Instance.MudarVolumes(volumes);
     }
 }

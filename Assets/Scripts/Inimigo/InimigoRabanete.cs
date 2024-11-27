@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InimigoRabanete : MonoBehaviour
@@ -14,7 +11,6 @@ public class InimigoRabanete : MonoBehaviour
     private float tempoDeEspera = 3;
     private float proximoTempo = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
         corpo = GetComponent<SpriteRenderer>();
@@ -22,7 +18,6 @@ public class InimigoRabanete : MonoBehaviour
         animacaoAtual = "run";
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(estaParado == true){
@@ -55,6 +50,7 @@ public class InimigoRabanete : MonoBehaviour
     }
 
     private void HitEnemy(){
+        AudioMng.Instance.PlayAudioDanoInimigo();
         PlayerMng.playerDano.DanoAoPlayer();
         animator.SetTrigger("hit");
         houveColisao = true;

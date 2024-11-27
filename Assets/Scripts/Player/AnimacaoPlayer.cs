@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimacaoPlayer : MonoBehaviour
 {
-    //Variável com os scripts do Animator
     private Animator animator;
-    // Start is called before the first frame update
+
     void Start()
     {
         animator = GetComponent<Animator>();
     }
 
-    //Iniciar a animação do personagem parado
     public void PlayIdle(){
         animator.SetBool("idle",true);
         animator.SetBool("jump",false);

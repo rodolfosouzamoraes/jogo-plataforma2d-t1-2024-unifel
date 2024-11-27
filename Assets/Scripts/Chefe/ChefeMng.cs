@@ -1,16 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class ChefeMng : MonoBehaviour
 {
-    private Animator animator;//Variavel da animação
+    private Animator animator;
     private int vidaChefe = 4;
-    private List<BoxCollider2D> colisores;//Lista de colisores do chefe
+    private List<BoxCollider2D> colisores;
     public GameObject itemFinal;
     public bool estaMovendo = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         itemFinal.SetActive(false);
@@ -29,6 +28,7 @@ public class ChefeMng : MonoBehaviour
             }
 
             animator.SetTrigger("death");
+            AudioMng.Instance.PlayAudioMorteChefe();
         }
         else{
             animator.SetTrigger("hit");
@@ -45,5 +45,4 @@ public class ChefeMng : MonoBehaviour
         itemFinal.SetActive(true);
         Destroy(gameObject);
     }
-
 }

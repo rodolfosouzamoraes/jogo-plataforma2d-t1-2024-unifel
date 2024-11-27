@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InimigoPlanta : MonoBehaviour
@@ -10,7 +8,7 @@ public class InimigoPlanta : MonoBehaviour
     private float tempoAgora = 0;
     public GameObject projetil;
     private bool teveDano = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         corpo = GetComponent<SpriteRenderer>();
@@ -18,9 +16,9 @@ public class InimigoPlanta : MonoBehaviour
         tempoAgora = Time.time + tempoDeEspera;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if(teveDano == true) return;
         if(Time.time > tempoAgora){
             tempoAgora = Time.time + tempoDeEspera;
             animator.SetTrigger("fire");
@@ -39,11 +37,13 @@ public class InimigoPlanta : MonoBehaviour
             transform.position.y+0.14f,0);
             projetilCriado.GetComponent<ProjetilPlanta>().MudarDirecao(Vector3.left);
         }
+        AudioMng.Instance.PlayAudioProjetil();
     }
 
     private void OnTriggerEnter2D(Collider2D colisao){
         if(colisao.gameObject.layer == 10 && teveDano == false){
             PlayerMng.playerDano.DanoAoPlayer();
+            AudioMng.Instance.PlayAudioDanoInimigo();
             teveDano = true;
             animator.SetTrigger("hit");
         }

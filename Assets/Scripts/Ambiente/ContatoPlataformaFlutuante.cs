@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ContatoPlataformaFlutuante : MonoBehaviour
@@ -7,7 +5,7 @@ public class ContatoPlataformaFlutuante : MonoBehaviour
     private SpriteRenderer corpo;
     private bool saiuDaColisao = false;
     private Animator animator;
-    // Start is called before the first frame update
+
     void Start()
     {
         corpo = GetComponentInParent<SpriteRenderer>();

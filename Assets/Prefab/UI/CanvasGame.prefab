@@ -625,6 +625,7 @@ GameObject:
   - component: {fileID: 8865534089731559681}
   - component: {fileID: 528054531996152498}
   - component: {fileID: 3404226793003215364}
+  - component: {fileID: 8180010934070662374}
   m_Layer: 5
   m_Name: CanvasGame
   m_TagString: Untagged
@@ -748,6 +749,18 @@ MonoBehaviour:
   tempoDoLevel: 15
   fimDoTempo: 0
   jogadorMorreu: 0
+--- !u!114 &8180010934070662374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3280614905845455232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2d36ff219aab0479f1bd79e17cf95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3406254971241941615
 GameObject:
   m_ObjectHideFlags: 0

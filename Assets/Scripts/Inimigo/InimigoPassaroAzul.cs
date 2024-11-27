@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InimigoPassaroAzul : MonoBehaviour
@@ -13,7 +11,6 @@ public class InimigoPassaroAzul : MonoBehaviour
     private Animator animator;
     private bool estaMorto = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -22,7 +19,6 @@ public class InimigoPassaroAzul : MonoBehaviour
         posicaoAlvo = posicaoFinal = transform.position + new Vector3(distanciaDeMovimento,0,0);
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, posicaoAlvo, Time.deltaTime * velocidadeDeMovimento);
@@ -39,7 +35,8 @@ public class InimigoPassaroAzul : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D colisao){
-        if(colisao.gameObject.tag.Equals("Player") && estaMorto == false){            
+        if(colisao.gameObject.tag.Equals("PePlayer") && estaMorto == false){ 
+            AudioMng.Instance.PlayAudioDanoInimigo();           
             PlayerMng.Instance.ExpelirPlayer();
             animator.SetTrigger("morte");
             estaMorto = true;

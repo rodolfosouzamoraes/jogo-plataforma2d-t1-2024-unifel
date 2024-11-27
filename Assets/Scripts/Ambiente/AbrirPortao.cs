@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AbrirPortao : MonoBehaviour
@@ -26,6 +23,7 @@ public class AbrirPortao : MonoBehaviour
         if(colisao.gameObject.tag.Equals("Player") && 
         abriuPortao == false &&
         PlayerMng.Instance.QtdChaves > 0){
+            AudioMng.Instance.PlayAudioPortao();
             abriuPortao = true;
             fechadura.SetActive(false);
             PlayerMng.Instance.DecrementarChave();

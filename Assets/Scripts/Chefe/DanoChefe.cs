@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DanoChefe : MonoBehaviour
 {
     private ChefeMng chefeMng;
     private bool houveColisao = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         chefeMng = GetComponentInParent<ChefeMng>();
@@ -16,6 +15,7 @@ public class DanoChefe : MonoBehaviour
         if(colisao.gameObject.tag == "PePlayer" && houveColisao == false){
             houveColisao = true;
             PlayerMng.Instance.ExpelirPlayer();
+            AudioMng.Instance.PlayAudioDanoInimigo();
             chefeMng.DecrementarVidaChefe();
             StartCoroutine(PermitirColisao());
         }
